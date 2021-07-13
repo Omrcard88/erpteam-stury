@@ -6,6 +6,7 @@ import com.hansalim.erp.domain.posts.PostsRepository;
 import com.hansalim.erp.web.dto.PostsResponseDto;
 import com.hansalim.erp.web.dto.PostsSaveRequestDto;
 import com.hansalim.erp.web.dto.PostsUpdateRequestDto;
+import com.hansalim.erp.web.dto.PostsListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
