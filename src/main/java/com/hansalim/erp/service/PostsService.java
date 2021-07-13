@@ -3,14 +3,15 @@ package com.hansalim.erp.service;
 
 import com.hansalim.erp.domain.posts.Posts;
 import com.hansalim.erp.domain.posts.PostsRepository;
+import com.hansalim.erp.web.dto.PostsListResponseDto;
 import com.hansalim.erp.web.dto.PostsResponseDto;
 import com.hansalim.erp.web.dto.PostsSaveRequestDto;
 import com.hansalim.erp.web.dto.PostsUpdateRequestDto;
-import com.hansalim.erp.web.dto.PostsListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -36,8 +37,15 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<PostsListResponseDto> findAllDesc(){
-        return PostsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete (Long id){
+        Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+        postsRepository.delete(posts);
     }
 }
