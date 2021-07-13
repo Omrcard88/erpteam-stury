@@ -14,6 +14,24 @@ cache:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r erpteam-stury *
+  - mkdir -p deploy
+  - mv erpteam-stury.zip deploy/erpteam-stury.zip
+
+deploy:
+  - provider: s3
+    access_key_id: AKIAR35EP2CGCOM5UQT4 # Travis repo settings에 설정된 값
+    secret_access_key: msaEOPSQrG9FA10G2hij+gI8J9YZH3meaKtzMDiI # Travis repo settings에 설정된 값
+    bucket: tw-test-build # S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private으로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
+
+
 
 # CI 실행 완료시 메일로 알람
 notifications:
