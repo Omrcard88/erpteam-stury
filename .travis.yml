@@ -37,8 +37,10 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAR35EP2CGCOM5UQT4
     secret_access_key: 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
-    bucket:tw-test-build
+
     key: erpteam-stury.zip
+    bucket: tw-test-build
+
 
     bundle_type: zip
     application: erpteam-stury
