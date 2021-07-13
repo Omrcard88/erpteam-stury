@@ -36,6 +36,7 @@ public class PostsRepositoryTest {
                                   .author("jintaewoo@naver.com")
                                   .build());
 
+
         List<Posts> postsList = postsRepository.findAll();
 
         Posts posts = postsList.get(0);
