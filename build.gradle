@@ -22,7 +22,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 group 'com.taewoo.study'
-version '1.0-SNAPSHOT-'+new Date().format('yyyyMMddHHmmss');
+version '1.0-SNAPSHOT';
 
 repositories {
     mavenCentral()
