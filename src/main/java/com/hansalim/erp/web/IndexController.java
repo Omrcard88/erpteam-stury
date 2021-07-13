@@ -1,5 +1,7 @@
 package com.hansalim.erp.web;
 
+import com.hansalim.erp.config.auth.LoginUser;
+import com.hansalim.erp.config.auth.dto.SessionUser;
 import com.hansalim.erp.service.PostsService;
 import com.hansalim.erp.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,26 +10,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
-
-//    public String index(Model model, @LoginUser SessionUser user) {
-//        model.addAttribute("posts", postsService.findAllDesc());
-//        if (user != null) {
-//            model.addAttribute("userName", user.getName());
-//        }
-//        return "index";
-//    }
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
 
+
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
+
+
 
     @GetMapping("/posts/save")
     public String postsSave() {
